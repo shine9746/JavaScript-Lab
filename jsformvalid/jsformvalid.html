@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <title>javascript-form-validation</title>
+
+        <meta charset="UTF-8"> 
+        <meta name="description" content="Html tutorials">
+        <meta name="keywords" content="HTML,CSS,XML,JavaScript">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    
+
+<!--**Created form and applied
+    validation using javascript**
+     
+    **Lab features added**
+
+    *Notifications are showed in p tag instead 
+    of alert window
+    *All input fields are required 
+    *Name input needed atleast 3 characters
+    and removed number[carry only letters
+    and space]
+    *Emails are in valid format
+    *Phone needed atleast of 10 characters
+    *Password needed atleast of 6 characters
+    *Avoided html validations
+    *Added checkbox for show/hide password[bonus]
+-->
+
+
+        <style>
+
+            .container{
+                margin: 50px auto 50px auto;
+            }
+
+            h3{
+                color: rgba(0, 0, 0, 0.527);
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  /*Heading */
+                font-weight: lighter;
+                font-size: xx-large;
+            }
+            small{
+                color: rgba(0, 0, 0, 0.651);
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;             /*Fields mandatory message */
+                position: relative;                                               
+                left: 32px;
+            }
+
+            form{
+                background-color: rgba(245, 245, 220, 0.685);
+                width: fit-content;
+                padding:30px;
+                box-shadow: 0 0 30px 5px rgba(44, 43, 43, 0.37);
+            }
+
+            #nameid,#emailid,#phoneid,#passwordid{
+                background-color: rgba(205, 205, 219, 0.342);
+                border-radius: 1px;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  /*Alert notification styles */
+                font-weight:normal;
+                font-size: 12px;
+                color: rgba(0, 0, 0, 0.671);
+                display: inline;
+                width: fit-content;
+            }
+
+            .btn{
+                position: relative;
+                left: 45px;                    /*Button styles*/
+            }
+
+            #showpaslabel{
+                font-size: 12px;
+                color: rgb(0, 0, 0);
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /*password checkbox styles*/
+                font-weight: lighter;
+            }
+
+           
+        </style>
+
+
+        <script>
+function formsubmission(){                                                    //Function for form validation
+            var name=document.formvalidation.name.value;  
+            var email=document.formvalidation.email.value;   
+            var emailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            var phone = document.formvalidation.phonenumber.value;
+            var numberonly = /^[0-9]+$/;
+            var password=document.getElementById("password").value; 
+            
+        
+            //Name logic
+            if (name==""){  
+              document.getElementById("nameid").innerHTML = "Name required" ;    //Removed empty space
+              return false;  
+            }
+
+            else{
+              document.getElementById("nameid").innerHTML = "Name is valid";
+            }
+        
+            if(!/^[a-zA-Z\s]*$/g.test(name)){
+              document.getElementById("nameid").innerHTML = "Name is not valid";       //Letters & space only in name input
+              return false  
+            }
+
+            else{
+                document.getElementById("nameid").innerHTML = "Name is valid";
+            }
+
+            if(name.length<3){  
+               document.getElementById("nameid").innerHTML = "Name should have atleast 3 characters";   //Name should be atleast 3 characters
+               return false;  
+            }
+
+           
+
+           
+            //Email logic
+            if(email ==""){
+                document.getElementById("emailid").innerHTML = "Email required";        //Removed empty space
+                return false;
+            }
+
+            if(!emailformat.test(email)){
+                document.getElementById("emailid").innerHTML = "Email is not valid";        //Email validation
+                return false;
+           
+           }  
+  
+            else{
+                document.getElementById("emailid").innerHTML = "Email is valid" ;
+            }
+
+
+
+
+            //Phone number logic//
+            if(phone ==""){
+               document.getElementById("phoneid").innerHTML="Phone number  required";      //Removed empty space
+               return false;
+            }
+
+
+            if (!numberonly.test(phone)){
+                document.getElementById("phoneid").innerHTML="Enter a valid phone number";       //phone number should be minimum 10
+                return false;
+            }
+
+            if(phone.length<10){
+               document.getElementById("phoneid").innerHTML="Enter a valid phone number";     //phone number should be minimum 10
+               return false;
+            } 
+
+            else{
+                document.getElementById("phoneid").innerHTML="Phone number is valid";
+            }
+
+
+
+
+
+         
+            //Password logic//
+            if(password ==""){
+               document.getElementById("passwordid").innerHTML = "Passwrd required";     //Removed empty space
+               return false;
+            }
+            
+
+            if(password.length<6){
+               document.getElementById("passwordid").innerHTML="Passwrd is not strong enough";      //Password length should be greater than or equal to 6
+               return false;
+            }
+
+
+            
+            alert("Your form is submitting.........")        //Shows an alert window when the form is correct after clicking sign up
+
+           
+            }
+
+
+
+function hidenseek() {                                                          //Function to show or hide password
+                
+            
+            if( password.type==="password"){
+                password.type = "text" ;                               
+            }
+            else{
+                password.type="password";
+            }
+
+            }
+           
+        </script>
+
+    </head>
+
+    <body>
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg offset-lg-4 col-md offset-md-4 col offset-1">
+
+
+                    <form method = "post"  action="" name="formvalidation" onsubmit="return formsubmission()">
+
+                        <h3 style="text-align: center;">SIGN UP</h3>
+                        <small>All fields are mandatory</small>
+
+                        <br><br>
+
+                        <label for="name">Name</label>
+                        <br>
+                        <input class="form-control" id="name"  name="name">
+                        <p id="nameid"></p>
+                        <br>
+    
+
+
+                        <label for="email">Email</label>
+                        <br>
+                        <input class="form-control" id="email" name="email"> 
+                        <p id="emailid"></p>
+                        <br>
+
+                        
+
+                        <label for="phone">Phone</label>
+                        <br>
+                        <input class="form-control" id="phone"  name="phonenumber">
+                        <p id="phoneid"></p>
+                        <br>
+    
+
+                        <label for="password">Password</label>
+                        <br>
+                        <input class="form-control" id="password" name="password" type="password">
+
+                        <label for="showpassword" id="showpaslabel">Show password</label>  <!--Checkbox and label-->
+                        <input id="showpassword" type="checkbox"  onclick="hidenseek()"> 
+
+                        <br>
+
+                        <p id="passwordid"></p>
+
+                        <br> <br>
+
+                        <input type="submit"class="btn btn-primary btn-lg" value="Sign up" >
+                  
+                    </form>
+    
+    
+                </div>
+
+            </div>
+
+  
+        </div>
+
+    </body>
+
+</html>
